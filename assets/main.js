@@ -93,3 +93,10 @@
   toggleBtns.forEach(btn => btn.addEventListener('click', () => setBilling(btn.getAttribute('data-billing'))));
   setBilling('monthly');
 })();
+window.addEventListener('resize', () => {
+  if (!mobile || !burger) return;
+  if (window.innerWidth > 900) {
+    mobile.setAttribute('hidden', '');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+});

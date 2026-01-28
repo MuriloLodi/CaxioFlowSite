@@ -155,7 +155,6 @@ img{max-width:100%;display:block;}
 }
 
 .nav-mobile{
-  display: none !important;
   pointer-events:auto;
   margin-top: 10px;
   padding: 12px;
@@ -712,4 +711,120 @@ img{max-width:100%;display:block;}
   .blog-feature-title{ font-size: 28px; }
   .ready-title{ font-size: 36px; }
   .footer-bottom{ flex-direction: column; gap: 10px; }
+}
+/* garante que hidden sempre funcione */
+[hidden] { display: none !important; }
+
+/* NAV */
+.site-nav{
+  position: fixed;
+  top: 16px;
+  left: 0; right: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+.nav-shell{
+  width: min(1160px, calc(100% - 34px));
+  margin: 0 auto;
+  position: relative; /* importante pro dropdown absoluto */
+}
+.nav-inner{
+  pointer-events:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* burger default (desktop escondido) */
+.nav-burger{
+  display:none;
+  pointer-events:auto;
+  border:0;
+  background: transparent;
+  border-radius: 14px;
+  padding: 10px;
+}
+.nav-burger span{
+  display:block;
+  width: 22px; height:2px;
+  background: rgba(0,0,0,.75);
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* MOBILE MENU: nunca aparece sozinho */
+.nav-mobile{
+  pointer-events:auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 10px);
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(0,0,0,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: none;              /* <- chave */
+  gap: 10px;
+}
+.site-nav.is-open .nav-mobile{
+  display: grid;              /* só quando abrir */
+}
+.nav-mobile a{
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.62);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* animação do burger virar X quando abre */
+.site-nav.is-open .nav-burger span:nth-child(1){
+  transform: translateY(6px) rotate(45deg);
+}
+.site-nav.is-open .nav-burger span:nth-child(2){
+  opacity: 0;
+}
+.site-nav.is-open .nav-burger span:nth-child(3){
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Responsivo */
+@media (max-width: 900px){
+  .nav-links, .nav-cta{ display:none; }
+  .nav-burger{ display:inline-flex; align-items:center; justify-content:center; }
+}
+html, body{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip){
+  html, body{ overflow-x: hidden; }
+}
+.container{
+  max-width: 1120px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+}
+
+.nav-shell{
+  max-width: 1160px;
+  width: calc(100% - 34px);
+  margin: 0 auto;
+}
+.hero, .section{
+  overflow-x: clip;
+}
+@supports not (overflow: clip){
+  .hero, .section{ overflow-x: hidden; }
 }
